@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -25,6 +26,9 @@ import android.widget.Toast;
 
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.ActivityLoginBinding;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,6 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (ParseUser.getCurrentUser() != null) {
+            goMainActivity();
+        }
+
         mUsernameEditText = binding.usernameEditText;
         mPasswordEditText = binding.passwordEditText;
         mLoginButton = binding.loginButton;
@@ -58,5 +66,25 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String username, String password) {
         Log.i(TAG, "Attempting to login user " + username);
+        // TODO: check credentials and progress user
+        ParseUser.logInInBackground(username, password, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                //TODO: better error handling
+                if (e != null) {
+                    Log.e(TAG, "Issue with login: ", e);
+                    Toast.makeText(LoginActivity.this, "Issue with login :(", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void goMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 }
