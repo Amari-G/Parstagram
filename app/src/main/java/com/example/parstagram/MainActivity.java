@@ -3,14 +3,16 @@ package com.example.parstagram;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.parstagram.databinding.ActivityMainBinding;
+import com.example.parstagram.fragments.FeedFragment;
+import com.example.parstagram.fragments.NewPostFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Context context = this;
     ActivityMainBinding binding;
 
+    final FragmentManager fragmentManager = getSupportFragmentManager();
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        bottomNavigationView = binding.bottomNavigationView;
         setBottomNavItemSelectedListener();
     }
 
@@ -36,18 +40,28 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.homeMenuItem:
+                        // TODO: update fragment
                         Toast.makeText(MainActivity.this, "HOME", Toast.LENGTH_SHORT).show();
+                        fragment = new FeedFragment();
                         break;
                     case R.id.newPostMenuItem:
                         Toast.makeText(MainActivity.this, "NEW POST", Toast.LENGTH_SHORT).show();
+                        fragment = new NewPostFragment();
                         break;
                     case R.id.userMenuItem:
-                    default:
+                        // TODO: update fragment
                         Toast.makeText(MainActivity.this, "PROFILE", Toast.LENGTH_SHORT).show();
+                        fragment = new NewPostFragment();
+                        break;
+                    default:
+                        fragment = new NewPostFragment();
                         break;
                 }
+                fragmentManager.beginTransaction().replace(binding.containerFrameLayout.getId(), fragment).commit();
                 return true;
             }
         });
+        // Set default selection
+        bottomNavigationView.setSelectedItemId(R.id.homeMenuItem);
     }
 }
