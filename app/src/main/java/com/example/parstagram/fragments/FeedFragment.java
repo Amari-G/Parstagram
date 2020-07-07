@@ -30,9 +30,9 @@ public class FeedFragment extends Fragment {
     FragmentFeedBinding binding;
 
     private RecyclerView feedRecyclerView;
-    private PostsAdapter adapter;
+    protected PostsAdapter adapter;
 
-    private List<Post> feed;
+    protected List<Post> feed;
 
     public FeedFragment() {
         // Required empty public constructor
@@ -60,10 +60,12 @@ public class FeedFragment extends Fragment {
         queryPosts();
     }
 
-    private void queryPosts() {
+    protected void queryPosts() {
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.setLimit(20);
+        query.addDescendingOrder(Post.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {

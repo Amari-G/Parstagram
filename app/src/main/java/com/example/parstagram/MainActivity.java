@@ -8,11 +8,11 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.parstagram.databinding.ActivityMainBinding;
 import com.example.parstagram.fragments.FeedFragment;
 import com.example.parstagram.fragments.NewPostFragment;
+import com.example.parstagram.fragments.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,11 +46,8 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new NewPostFragment();
                         break;
                     case R.id.userMenuItem:
-                        // TODO: update fragment
-                        fragment = new NewPostFragment();
-                        break;
                     default:
-                        fragment = new NewPostFragment();
+                        fragment = new UserFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(binding.containerFrameLayout.getId(), fragment).commit();
