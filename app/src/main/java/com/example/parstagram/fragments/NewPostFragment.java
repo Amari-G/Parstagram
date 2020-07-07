@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.inputmethodservice.AbstractInputMethodService;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
@@ -25,9 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.parstagram.NewPostActivity;
 import com.example.parstagram.Post;
-import com.example.parstagram.R;
 import com.example.parstagram.databinding.FragmentNewPostBinding;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -68,8 +64,7 @@ public class NewPostFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentNewPostBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        return view;
+        return binding.getRoot();
     }
 
     // This event is triggered soon after onCreateView().
@@ -82,6 +77,8 @@ public class NewPostFragment extends Fragment {
         mShareButton = binding.shareButton;
         mCaptionEditText = binding.captionEditText;
         mPostImageView = binding.postPictureImageView;
+
+        setOnClickListeners();
     }
 
     @Override
@@ -174,9 +171,9 @@ public class NewPostFragment extends Fragment {
 
     private void savePost(String description, ParseUser currentUser, File mPhotoFile) {
         Post post = new Post();
-        post.setKeyDescription(description);
-        post.setKeyImage(new ParseFile(mPhotoFile));
-        post.setKeyUser(currentUser);
+        post.setDescription(description);
+        post.setImage(new ParseFile(mPhotoFile));
+        post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -203,7 +200,7 @@ public class NewPostFragment extends Fragment {
                     return;
                 }
                 for (Post post : posts) {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getKeyUser().getUsername());
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
             }
         });

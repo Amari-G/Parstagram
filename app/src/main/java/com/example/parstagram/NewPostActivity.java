@@ -146,9 +146,9 @@ public class NewPostActivity extends AppCompatActivity {
 
     private void savePost(String description, ParseUser currentUser, File mPhotoFile) {
         Post post = new Post();
-        post.setKeyDescription(description);
-        post.setKeyImage(new ParseFile(mPhotoFile));
-        post.setKeyUser(currentUser);
+        post.setDescription(description);
+        post.setImage(new ParseFile(mPhotoFile));
+        post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -175,7 +175,7 @@ public class NewPostActivity extends AppCompatActivity {
                     return;
                 }
                 for (Post post : posts) {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getKeyUser().getUsername());
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
             }
         });

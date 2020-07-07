@@ -2,15 +2,37 @@ package com.example.parstagram.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.parstagram.R;
+import com.example.parstagram.Post;
+import com.example.parstagram.PostsAdapter;
+import com.example.parstagram.databinding.FragmentFeedBinding;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FeedFragment extends Fragment {
+
+    private static final String TAG = "FeedFragment";
+
+    FragmentFeedBinding binding;
+
+    private RecyclerView feedRecyclerView;
+    private PostsAdapter adapter;
+
+    private List<Post> feed;
 
     public FeedFragment() {
         // Required empty public constructor
@@ -20,6 +42,42 @@ public class FeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false);
+        binding = FragmentFeedBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        feedRecyclerView = binding.feedRecyclerView;
+
+        // populate recycler view
+        feed = new ArrayList<>();
+        adapter = new PostsAdapter(getContext(), feed);
+
+        feedRecyclerView.setAdapter(adapter);
+        feedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        queryPosts();
+    }
+
+    private void queryPosts() {
+        // Specify which class to query
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USER);
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Problem  with getting posts", e);
+                    return;
+                }
+                for (Post post : posts) {
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                }
+
+                feed.addAll(posts);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }

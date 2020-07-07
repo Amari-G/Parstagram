@@ -16,23 +16,23 @@ public class Post extends ParseObject {
         return getString(KEY_DESCRIPTION);
     }
 
-    public void setKeyDescription(String description) {
+    public void setDescription(String description) {
         put(KEY_DESCRIPTION, description);
     }
 
-    public ParseFile getKeyImage() {
+    public ParseFile getImage() {
         return getParseFile(KEY_IMAGE);
     }
 
-    public void setKeyImage(ParseFile image) {
+    public void setImage(ParseFile image) {
         put(KEY_IMAGE, image);
     }
 
-    public ParseUser getKeyUser() {
+    public ParseUser getUser() {
         return getParseUser(KEY_USER);
     }
 
-    public void setKeyUser(ParseUser user) {
+    public void setUser(ParseUser user) {
         put(KEY_USER, user);
     }
 
