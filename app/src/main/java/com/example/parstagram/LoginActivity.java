@@ -78,12 +78,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                goMainActivity();
             }
         });
     }
 
     private void goMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, NewPostActivity.class);
         startActivity(i);
         finish();
     }
