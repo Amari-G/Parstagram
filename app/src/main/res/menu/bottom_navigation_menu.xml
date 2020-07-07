@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeMenuItem"
+        android:enabled="true"
+        android:icon="@drawable/instagram_home_outline_24"
+        android:title="@string/bottom_navigation_home"
+        app:showAsAction="always" />
     <item
         android:id="@+id/newPostMenuItem"
         android:enabled="true"
         android:icon="@drawable/instagram_new_post_outline_24"
-        android:title="@string/bottom_navigation_new_post"/>
+        android:title="@string/bottom_navigation_new_post"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/userMenuItem"
+        android:enabled="true"
+        android:icon="@drawable/instagram_user_outline_24"
+        android:title="@string/bottom_navigation_user"
+        app:showAsAction="always" />
 </menu>

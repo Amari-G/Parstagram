@@ -18,9 +18,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
+        app:itemIconTint="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        android:elevation="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

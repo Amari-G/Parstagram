@@ -2,11 +2,13 @@ package com.example.parstagram;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.parstagram.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,13 +33,18 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
                 switch (item.getItemId()) {
-                    case R.id.newPostMenuItem:
-                        Intent intent = new Intent(context, NewPostActivity.class);
-                        startActivity(intent);
+                    case R.id.homeMenuItem:
+                        Toast.makeText(MainActivity.this, "HOME", Toast.LENGTH_SHORT).show();
                         break;
+                    case R.id.newPostMenuItem:
+                        Toast.makeText(MainActivity.this, "NEW POST", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.userMenuItem:
                     default:
-                        return false;
+                        Toast.makeText(MainActivity.this, "PROFILE", Toast.LENGTH_SHORT).show();
+                        break;
                 }
                 return true;
             }

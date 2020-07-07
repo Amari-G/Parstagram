@@ -13,4 +13,5 @@
     <string name="bottom_navigation_new_post">New Post</string>
     <string name="captionEditText_hint">Write a caption...</string>
     <string name="shareButton_text">Share</string>
+    <string name="bottom_navigation_user">User</string>
 </resources>
