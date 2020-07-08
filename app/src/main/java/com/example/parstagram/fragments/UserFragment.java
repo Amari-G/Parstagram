@@ -7,10 +7,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.parstagram.Post;
-import com.example.parstagram.PostsAdapter;
+import com.example.parstagram.models.Post;
 import com.example.parstagram.UserPostsAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -25,7 +23,6 @@ public class UserFragment extends FeedFragment {
     private static final String TAG = "UserFragment";
 
     private UserPostsAdapter adapter;
-
 
     @Override
     protected void queryPosts() {
@@ -59,11 +56,13 @@ public class UserFragment extends FeedFragment {
 
         // populate recycler view
         feed = new ArrayList<>();
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+
         adapter = new UserPostsAdapter(getContext(), feed);
 
         feedRecyclerView.setAdapter(adapter);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
-        feedRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        feedRecyclerView.setLayoutManager(gridLayoutManager);
         queryPosts();
     }
 }

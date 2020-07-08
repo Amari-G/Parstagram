@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.parstagram.Post;
+import com.example.parstagram.models.Post;
 import com.example.parstagram.PostsAdapter;
 import com.example.parstagram.databinding.FragmentFeedBinding;
 import com.parse.FindCallback;

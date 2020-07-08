@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setBottomNavItemSelectedListener();
     }
 
+    public void replaceFragment(Fragment fragment) {
+        fragmentManager.beginTransaction().replace(binding.containerFrameLayout.getId(), fragment).commit();
+    }
+
     private void setBottomNavItemSelectedListener() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

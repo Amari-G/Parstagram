@@ -23,7 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.parstagram.Post;
+import com.example.parstagram.models.Post;
 import com.example.parstagram.databinding.FragmentNewPostBinding;
 import com.parse.FindCallback;
 import com.parse.ParseException;
