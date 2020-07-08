@@ -25,6 +25,23 @@ public class UserFragment extends FeedFragment {
     private UserPostsAdapter adapter;
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        feedRecyclerView = binding.feedRecyclerView;
+
+        // populate recycler view
+        feed = new ArrayList<>();
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+
+        adapter = new UserPostsAdapter(getContext(), feed);
+
+        feedRecyclerView.setAdapter(adapter);
+        feedRecyclerView.setLayoutManager(gridLayoutManager);
+        queryPosts();
+    }
+
+    @Override
     protected void queryPosts() {
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
@@ -47,22 +64,5 @@ public class UserFragment extends FeedFragment {
                 adapter.notifyDataSetChanged();
             }
         });
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        feedRecyclerView = binding.feedRecyclerView;
-
-        // populate recycler view
-        feed = new ArrayList<>();
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
-
-        adapter = new UserPostsAdapter(getContext(), feed);
-
-        feedRecyclerView.setAdapter(adapter);
-        feedRecyclerView.setLayoutManager(gridLayoutManager);
-        queryPosts();
     }
 }

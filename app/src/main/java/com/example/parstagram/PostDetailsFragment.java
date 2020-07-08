@@ -25,6 +25,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PostDetailsFragment extends Fragment {
@@ -40,6 +41,7 @@ public class PostDetailsFragment extends Fragment {
     private ImageView postImageView;
     private TextView userNameTextView;
     private TextView postCaptionTextView;
+    private TextView postTimestampTextView;
 
     public PostDetailsFragment() {
         // Required empty public constructor
@@ -55,6 +57,7 @@ public class PostDetailsFragment extends Fragment {
         postImageView = binding.postImageView;
         userNameTextView = binding.userNameTextView;
         postCaptionTextView = binding.postCaptionTextView;
+        postTimestampTextView = binding.postTimestampTextView;
 
         return binding.getRoot();
     }
@@ -72,6 +75,12 @@ public class PostDetailsFragment extends Fragment {
             // Bind the post data to the view elements
             postCaptionTextView.setText(mPost.getDescription());
             userNameTextView.setText(mPost.getUser().getUsername());
+
+            Date date = mPost.getCreatedAt();
+            String elapsedTime = ParseDate.getElapsedTime(date);
+            postTimestampTextView.setText(elapsedTime);
+
+            Log.i(TAG, "Created " + elapsedTime);
 
             ParseFile image = mPost.getImage();
 
