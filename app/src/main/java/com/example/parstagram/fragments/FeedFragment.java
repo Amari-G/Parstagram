@@ -29,8 +29,8 @@ public class FeedFragment extends Fragment {
 
     FragmentFeedBinding binding;
 
-    private RecyclerView feedRecyclerView;
-    protected PostsAdapter adapter;
+    protected RecyclerView feedRecyclerView;
+    private PostsAdapter adapter;
 
     protected List<Post> feed;
 

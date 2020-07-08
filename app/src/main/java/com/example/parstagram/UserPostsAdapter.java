@@ -15,12 +15,12 @@ import com.parse.ParseFile;
 
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
+public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder> {
 
     protected Context context;
     private List<Post> posts;
 
-    public PostsAdapter(Context context, List<Post> posts) {
+    public UserPostsAdapter(Context context, List<Post> posts) {
         this.context = context;
         this.posts = posts;
     }
@@ -28,7 +28,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_post_image, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,24 +45,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView userImageView;
         private ImageView postImageView;
-        private TextView userNameTextView;
-        private TextView postCaptionTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userImageView = itemView.findViewById(R.id.userImageView);
             postImageView = itemView.findViewById(R.id.postImageView);
-            userNameTextView = itemView.findViewById(R.id.userNameTextView);
-            postCaptionTextView = itemView.findViewById(R.id.postCaptionTextView);
         }
 
         public void bind(Post post) {
             // Bind the post data to the view elements
-            postCaptionTextView.setText(post.getDescription());
-            userNameTextView.setText(post.getUser().getUsername());
 
             ParseFile image = post.getImage();
 
