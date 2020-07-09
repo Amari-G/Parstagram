@@ -47,6 +47,16 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
         return mPosts.size();
     }
 
+    // Clean all elements of the recycler
+    public void clear() {
+        mPosts.clear();
+        notifyDataSetChanged();
+    }
+    public void addAll(List<Post> posts) {
+        posts.addAll(posts);
+        notifyDataSetChanged();
+    }
+
     public void switchContent(Fragment fragment) {
         if (mContext == null)
             return;

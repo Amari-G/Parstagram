@@ -27,17 +27,17 @@ public class UserFragment extends FeedFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        feedRecyclerView = binding.feedRecyclerView;
+        mFeedRecyclerView = binding.feedRecyclerView;
 
         // populate recycler view
-        feed = new ArrayList<>();
+        mFeed = new ArrayList<>();
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
 
-        adapter = new UserPostsAdapter(getContext(), feed);
+        adapter = new UserPostsAdapter(getContext(), mFeed);
 
-        feedRecyclerView.setAdapter(adapter);
-        feedRecyclerView.setLayoutManager(gridLayoutManager);
+        mFeedRecyclerView.setAdapter(adapter);
+        mFeedRecyclerView.setLayoutManager(gridLayoutManager);
         queryPosts();
     }
 
@@ -60,7 +60,8 @@ public class UserFragment extends FeedFragment {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
-                feed.addAll(posts);
+                adapter.clear();
+                mFeed.addAll(posts);
                 adapter.notifyDataSetChanged();
             }
         });

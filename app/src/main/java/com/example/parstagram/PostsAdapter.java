@@ -19,11 +19,11 @@ import java.util.List;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
     protected Context context;
-    private List<Post> posts;
+    private List<Post> mPosts;
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
-        this.posts = posts;
+        this.mPosts = posts;
     }
 
     @NonNull
@@ -35,13 +35,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Post post = posts.get(position);
+        Post post = mPosts.get(position);
         holder.bind(post);
     }
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        return mPosts.size();
+    }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        mPosts.clear();
+        notifyDataSetChanged();
+    }
+    public void addAll(List<Post> posts) {
+        posts.addAll(posts);
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
