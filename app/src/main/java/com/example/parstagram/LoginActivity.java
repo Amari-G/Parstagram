@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText mUsernameEditText;
     EditText mPasswordEditText;
     Button mLoginButton;
+    ProgressBar mProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             goMainActivity();
         }
 
+        mProgressBar = binding.loadingProgressBar;
         mUsernameEditText = binding.usernameEditText;
         mPasswordEditText = binding.passwordEditText;
         mLoginButton = binding.loginButton;
@@ -62,9 +64,12 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
+
+        mUsernameEditText.requestFocus();
     }
 
     private void loginUser(String username, String password) {
+        mProgressBar.setVisibility(ProgressBar.VISIBLE);
         Log.i(TAG, "Attempting to login user " + username);
         // TODO: check credentials and progress user
         ParseUser.logInInBackground(username, password, new LogInCallback() {
@@ -76,9 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Issue with login :(", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                 goMainActivity();
+                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
             }
         });
     }
