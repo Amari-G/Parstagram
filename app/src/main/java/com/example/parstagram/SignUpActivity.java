@@ -1,52 +1,41 @@
 package com.example.parstagram;
 
-import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.parstagram.R;
-import com.example.parstagram.databinding.ActivityLoginBinding;
+import com.example.parstagram.databinding.ActivitySignUpBinding;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
-public class LoginActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "SignUpActivity";
 
-    private ActivityLoginBinding binding;
+    ActivitySignUpBinding binding;
 
     EditText mUsernameEditText;
     EditText mPasswordEditText;
+    EditText mConfirmPasswordEditText;
     Button mLoginButton;
     ProgressBar mProgressBar;
-    TextView mSignUpTextView;
+    TextView mLogInTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         if (ParseUser.getCurrentUser() != null) {
@@ -59,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         mUsernameEditText.requestFocus();
 
         mPasswordEditText = binding.passwordEditText;
+        mConfirmPasswordEditText = binding.confirmPasswordEditText;
 
         mLoginButton = binding.loginButton;
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -67,37 +57,42 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i(TAG, "onClick login button");
                 String username = mUsernameEditText.getText().toString();
                 String password = mPasswordEditText.getText().toString();
-                loginUser(username, password);
+                signUpUser(username, password);
             }
         });
 
-        mSignUpTextView = binding.signUpTextView;
+
+        mLogInTextView = binding.logInTextView;
         String first = "Don't have an account? ";
         String next = "<font color='#3B5998'><b>Sign up.</b></font>";
-        mSignUpTextView.setText(Html.fromHtml(first + next));
-        mSignUpTextView.setOnClickListener(new View.OnClickListener() {
+        mLogInTextView.setText(Html.fromHtml(first + next));
+        mLogInTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goSignUpActivity();
+                goLoginActivity();
             }
         });
     }
 
-    private void loginUser(String username, String password) {
+    private void signUpUser(String username, String password) {
         mProgressBar.setVisibility(ProgressBar.VISIBLE);
-        Log.i(TAG, "Attempting to login user " + username);
-        // TODO: check credentials and progress user
-        ParseUser.logInInBackground(username, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                //TODO: better error handling
+        Log.i(TAG, "Attempting to sign user up" + username);
+        // Create the ParseUser
+        ParseUser user = new ParseUser();
+        // Set core properties
+        user.setUsername(mUsernameEditText.getText().toString());
+        user.setPassword(mPasswordEditText.getText().toString());
+//        user.setEmail("email@example.com");
+        // Invoke signUpInBackground
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Issue with login: ", e);
-                    mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-                    Toast.makeText(LoginActivity.this, "Issue with login :(", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Issue with sign up.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(SignUpActivity.this, "Sign up successful", Toast.LENGTH_SHORT).show();
                 goMainActivity();
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
             }
@@ -110,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goSignUpActivity() {
-        Intent i = new Intent(this, SignUpActivity.class);
+    private void goLoginActivity() {
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
     }
