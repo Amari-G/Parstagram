@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import com.example.parstagram.databinding.ActivityMainBinding;
 import com.example.parstagram.fragments.FeedFragment;
 import com.example.parstagram.fragments.NewPostFragment;
-import com.example.parstagram.fragments.UserFragment;
+import com.example.parstagram.fragments.MyProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.userMenuItem:
                     default:
-                        fragment = new UserFragment();
+                        fragment = new MyProfileFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(binding.containerFrameLayout.getId(), fragment).commit();
