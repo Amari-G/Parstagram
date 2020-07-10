@@ -3,24 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/postHeaderConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/userImageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="16dp"
+            android:background="@drawable/instagram_user_filled_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/userNameTextView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/userNameTextView"
@@ -29,26 +31,71 @@
             android:layout_marginStart="16dp"
             android:gravity="center_vertical"
             android:textColor="@android:color/black"
+            android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/userImageView"
-            tools:text="\@amariwgarrett" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="amariwgarrett" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/media_option_button"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/headerDivider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        app:layout_constraintTop_toBottomOf="@id/postHeaderConstraintLayout"
+        android:background="#CCCCCC"/>
 
     <ImageView
         android:id="@+id/postImageView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/postHeaderConstraintLayout"
+        app:layout_constraintTop_toBottomOf="@id/headerDivider"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
+        android:id="@+id/captionUserNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="8dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postImageView"
+        tools:text="amariwgarrett" />
+
+    <TextView
         android:id="@+id/postCaptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:layout_marginStart="4dp"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/captionUserNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/postImageView"
+        tools:text="Check out this awesome photo!" />
+
+    <TextView
+        android:id="@+id/postTimestampTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/postImageView"
-        tools:text="Check out this awesome photo!" />
+        app:layout_constraintTop_toBottomOf="@+id/postCaptionTextView"
+        tools:text="15 minutes ago" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
