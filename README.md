@@ -35,15 +35,15 @@ Here's a walkthrough of implemented user stories:
 
 **Infinite Scroll**
 
-<img src='https://github.com/Amari-G/codepath/blob/master/Kap/inf_scroll.gif' />
+<img src='https://github.com/Amari-G/Parstagram/blob/master/parstagram_newuser.gif' />
 
-**Compose Tweet**
+**Existing User**
 
-<img src='https://github.com/Amari-G/codepath/blob/master/Kap/compose.gif' />
+<img src='https://github.com/Amari-G/Parstagram/blob/master/parstagram_existinguser.gif' />
 
-**Persistence**
+**Refresh**
 
-<img src='https://github.com/Amari-G/codepath/blob/master/Kap/persistence.gif' />
+<img src='https://github.com/Amari-G/Parstagram/blob/master/parstagram_refresh.gif' />
 
 GIFs created with [Kap](http://www.getkap.co/).
 
