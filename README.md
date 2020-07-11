@@ -1,14 +1,14 @@
 # Project 3 - *Parstagram*
 
-**Parstagram** is an android app built to .
+**Parstagram** is an android app built to mimic Instagram in functionality and appearance, for educational purposes.
 
 Submitted by: **Amari Garrett**
 
-Time spent: **25** hours spent in total
+Time spent: **35** hours spent in total
 
 ## User Stories
 
-The following **required** functionality is completed:
+The following **required** stories are completed:
 
 * [X] User sees app icon in home screen. (1 point)
 * [X] User can sign up to create a new account using Parse authentication (1 point)
@@ -20,7 +20,7 @@ The following **required** functionality is completed:
 * [X] User can tap a post to view post details, including timestamp and caption. (2 points)
 
 
-The following **stretch** features are implemented:
+The following **stretch** features have been implemented:
 
 * [X] Style the login page to look like the real Instagram login page. (2 points)
 * [X] Style the feed to look like the real Instagram feed. (2 points)
