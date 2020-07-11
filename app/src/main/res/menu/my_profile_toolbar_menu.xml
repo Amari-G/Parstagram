@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/composeMenuItem"
-        android:icon="@drawable/direct"
+        android:id="@+id/logOutMenuItem"
+        android:icon="@drawable/ic_outline_log_out_24"
         app:showAsAction="always"
         android:title="Compose">
     </item>

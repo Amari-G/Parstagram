@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.parstagram.ParseDate;
 import com.example.parstagram.databinding.FragmentPostDetailsBinding;
 import com.example.parstagram.models.Post;
+import com.example.parstagram.models.User;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
@@ -34,6 +35,7 @@ public class PostDetailsFragment extends Fragment {
     private ImageView userImageView;
     private ImageView postImageView;
     private TextView userNameTextView;
+    private TextView captionUserNameTextView;
     private TextView postCaptionTextView;
     private TextView postTimestampTextView;
 
@@ -50,6 +52,7 @@ public class PostDetailsFragment extends Fragment {
         userImageView = binding.userImageView;
         postImageView = binding.postImageView;
         userNameTextView = binding.userNameTextView;
+        captionUserNameTextView = binding.captionUserNameTextView;
         postCaptionTextView = binding.postCaptionTextView;
         postTimestampTextView = binding.postTimestampTextView;
 
@@ -69,6 +72,7 @@ public class PostDetailsFragment extends Fragment {
             // Bind the post data to the view elements
             postCaptionTextView.setText(mPost.getDescription());
             userNameTextView.setText(mPost.getUser().getUsername());
+            captionUserNameTextView.setText(mPost.getUser().getUsername());
 
             Date date = mPost.getCreatedAt();
             String elapsedTime = ParseDate.getElapsedTime(date);

@@ -11,9 +11,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.parstagram.R;
 import com.example.parstagram.models.Post;
 import com.example.parstagram.PostsAdapter;
 import com.example.parstagram.databinding.FragmentFeedBinding;
@@ -45,6 +48,8 @@ public class FeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentFeedBinding.inflate(inflater, container, false);
+
+        setHasOptionsMenu(true);
         return binding.getRoot();
     }
 
@@ -75,7 +80,10 @@ public class FeedFragment extends Fragment {
         queryPosts();
     }
 
-
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.feed_toolbar_menu, menu);
+    }
 
     protected void queryPosts() {
         // Specify which class to query

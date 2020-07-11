@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,12 +13,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.parstagram.LoginActivity;
+import com.example.parstagram.MainActivity;
+import com.example.parstagram.R;
 import com.example.parstagram.UserPostsAdapter;
 import com.example.parstagram.databinding.FragmentMyProfileBinding;
 import com.example.parstagram.models.Post;
@@ -37,8 +42,8 @@ public class MyProfileFragment extends UserFragment {
     protected RecyclerView mFeedRecyclerView;
     private SwipeRefreshLayout mSwipeContainer;
 
+    Toolbar mToolbar;
     TextView mUsernameTextView;
-    Button mLogOutButton;
 
     protected List<Post> mFeed;
 
@@ -49,29 +54,30 @@ public class MyProfileFragment extends UserFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentMyProfileBinding.inflate(inflater, container, false);
+
+        // Change Toolbar
+        mToolbar = getActivity().findViewById(R.id.mainToolbar);
+//        mToolbar = binding.profileToolbar;
+        mToolbar.setTitle(ParseUser.getCurrentUser().getUsername());
+        mToolbar.setElevation(0F);
+        setHasOptionsMenu(true);
+//
+//        ((MainActivity)getActivity()).setSupportActionBar(mToolbar);
+
         return binding.getRoot();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.my_profile_toolbar_menu, menu);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mUsernameTextView = binding.userNameTextView;
-        mLogOutButton = binding.logOutButton;
         mFeedRecyclerView = binding.feedRecyclerView;
 
         mUsernameTextView.setText(ParseUser.getCurrentUser().getUsername());
-
-        mLogOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ParseUser.logOut();
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                startActivity(intent);
-
-                if (ParseUser.getCurrentUser() == null) Log.i(TAG, "User signed out");
-
-                getActivity().finish();
-            }
-        });
 
         // Lookup the swipe container view
         mSwipeContainer = binding.swipeContainer;

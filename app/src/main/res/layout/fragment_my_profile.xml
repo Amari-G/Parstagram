@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".fragments.MyProfileFragment">
-
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
@@ -15,6 +15,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/profileToolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <ImageView
                 android:id="@+id/userImageView"
@@ -48,17 +56,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
 
-            <Button
-                android:id="@+id/logOutButton"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:background="@android:color/holo_red_dark"
-                android:text="Sign Out"
-                android:textColor="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/headerDivider" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/feedRecyclerView"
                 android:layout_width="0dp"
@@ -66,7 +63,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/logOutButton" />
+                app:layout_constraintTop_toBottomOf="@+id/headerDivider" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
